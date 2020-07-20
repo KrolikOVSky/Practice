@@ -1,4 +1,0 @@
-Zoom 45
-Alex 25
-Maria 33
-Mike 21

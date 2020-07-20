@@ -1,4 +1,4 @@
-package com.practice.main.java;
+package com.practice.main.java.listType;
 
 public interface IFactory{
     public String getName();

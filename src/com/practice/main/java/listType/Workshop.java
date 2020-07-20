@@ -1,7 +1,8 @@
-package com.practice.main.java;
+package com.practice.main.java.listType;
 
-public class Workshop implements Comparable<Workshop>{
+public class Workshop {
 
+    private final static String WORKSHOP_STRING_FORMAT = "Workshop: %-7s | %-10s | %-10s |  %-10s | %-8.2f |";
     private String id;
     private String name;
     private int numberOfPositions;
@@ -66,21 +67,22 @@ public class Workshop implements Comparable<Workshop>{
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return 7 * (Integer.valueOf(id).hashCode());
     }
 
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj);
+        if (obj == this) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+        Workshop workshop = (Workshop) obj;
+        return id.equals(workshop.id);
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return String.format(WORKSHOP_STRING_FORMAT, getId(), getName(), getNumberOfPositions(), getNumberOfWorkers(), getSalary());
     }
 
-    @Override
-    public int compareTo(Workshop workshop) {
-        return 0;
-    }
+
 }

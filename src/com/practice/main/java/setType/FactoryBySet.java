@@ -1,6 +1,9 @@
-package com.practice.main.java;
+package com.practice.main.java.setType;
 
-public class FactoryBySet implements IFactory{
+import com.practice.main.java.listType.IFactory;
+import com.practice.main.java.listType.Workshop;
+
+public class FactoryBySet implements IFactory {
 
 
     private String name;
