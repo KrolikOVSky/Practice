@@ -1,4 +1,4 @@
-package com.practice.main.java.listType;
+package com.practice.main.java.setType;
 
 public class Workshop implements Comparable<Workshop>{
 

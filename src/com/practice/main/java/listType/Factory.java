@@ -1,11 +1,8 @@
 package com.practice.main.java.listType;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
-public class FactoryByList {
+public class Factory {
 
 
     // Fields
@@ -15,17 +12,17 @@ public class FactoryByList {
 
 
     // Constructors
-    public FactoryByList(String name, List list) {
+    public Factory(String name, List list) {
         this.name = name;
         this.workshops = new ArrayList<Workshop>(list);
     }
 
-    public FactoryByList(String name) {
+    public Factory(String name) {
         this.name = name;
         workshops = new ArrayList<Workshop>();
     }
 
-    public FactoryByList() {
+    public Factory() {
         name = "";
         workshops = new ArrayList<Workshop>();
     }
@@ -51,15 +48,16 @@ public class FactoryByList {
 
     // Some useful methods
     public void print() {
+        System.out.printf("---%s---\n%15s      |%15s           |%23s      |%25s      |%12s      |\n", name, "ID", "Name", "Number of workers", "Number of positions", "Salary");//   |%7s   |%20s   |%22s   |%9s
         for (var el : workshops) {
             System.out.println(el.toString());
         }
         System.out.println();
     }
 
-    public Workshop getWorkshopById(String id) {
+    public Workshop getWorkshopById(long id) {
         for (var el : workshops) {
-            if (el.getId().equals(id)) return el;
+            if (el.getId() == id) return el;
         }
         return null;
     }
@@ -78,7 +76,7 @@ public class FactoryByList {
         return workshops.add(workshop);
     }
 
-    public boolean removeWorkshop(String id) {
+    public boolean removeWorkshop(long id) {
         if (workshops == null || getWorkshopById(id) == null) return false;
         return workshops.remove(getWorkshopById(id));
     }
@@ -93,17 +91,17 @@ public class FactoryByList {
         return middleSalary / getNumberOfWorkshops();
     }
 
-    public FactoryByList getWorkshopsWithAboveMiddleSalary() {
+    public Factory getWorkshopsWithAboveMiddleSalary() {
         if (workshops == null) return null;
-        FactoryByList newWorkshops = new FactoryByList();
+        Factory newWorkshops = new Factory(name);
         for (var el : workshops) {
             if (el.getSalary() > getMiddleSalaryOfFactory()) newWorkshops.addWorkshop(el);
         }
         return newWorkshops;
     }
 
-    public FactoryByList getWorkshopsEmptyPositionsBetween(int a, int b) {
-        FactoryByList newWorkshops = new FactoryByList();
+    public Factory getWorkshopsEmptyPositionsBetween(int a, int b) {
+        Factory newWorkshops = new Factory(name);
         for (var el : workshops) {
             if (el.getNumberOfPositions() >= a && el.getNumberOfPositions() <= b) newWorkshops.addWorkshop(el);
         }
@@ -117,30 +115,36 @@ public class FactoryByList {
 
 
     // Sorting
-    public FactoryByList sortById() {
+    public Factory sort(Comparator comparator){
+        Factory factory = new Factory(name, workshops);
+        factory.workshops.sort(comparator);
+        return factory;
+    }
+
+    public Factory sortById() {
         Comparator<Workshop> comparator = Comparator.comparing(Workshop::getId);
-        FactoryByList list = new FactoryByList(name, workshops);
+        Factory list = new Factory(name, workshops);
         list.workshops.sort(comparator);
         return list;
     }
 
-    public FactoryByList sortBySalaryBigToSmall() {
+    public Factory sortBySalaryDesc() {
         Comparator<Workshop> comparator = Comparator.comparing(Workshop::getSalary).reversed();
-        FactoryByList list = new FactoryByList(name, workshops);
+        Factory list = new Factory(name, workshops);
         list.workshops.sort(comparator);
         return list;
     }
 
-    public FactoryByList sortBySalarySmallToBig() {
+    public Factory sortBySalaryAsc() {
         Comparator<Workshop> comparator = Comparator.comparing(Workshop::getSalary);
-        FactoryByList list = new FactoryByList(name, workshops);
+        Factory list = new Factory(name, workshops);
         list.workshops.sort(comparator);
         return list;
     }
 
-    public FactoryByList sortByNameAndId() {
-        Comparator<Workshop> comparator = Comparator.comparing(Workshop::getName).thenComparing(Workshop::getId);
-        FactoryByList list = new FactoryByList(name, workshops);
+    public Factory sortBySalaryAndName() {
+        Comparator<Workshop> comparator = Comparator.comparing(Workshop::getSalary).thenComparing(Workshop::getName);
+        Factory list = new Factory(name, workshops);
         list.workshops.sort(comparator);
         return list;
     }
