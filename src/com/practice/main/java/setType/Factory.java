@@ -153,12 +153,12 @@ public class Factory {
 
 
     //Additional methods
-    public Factory removeAllWorkshopsWithAboveAvgSalary(){
+    /*public Factory removeAllWorkshopsWithAboveAvgSalary(){
         var avg = getMiddleSalaryOfFactory();
         for(var el : workshops){
             if(avg < el.getSalary()) workshops.removeAll();
         }
-    }
+    }*/
 
 
 }
